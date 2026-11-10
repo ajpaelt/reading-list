@@ -1,8 +1,13 @@
-function BookText () {
+import type {BookCardProps} from './BookCard'
+
+function BookText (props:BookCardProps) {
+    const {title} = props;
+    const {genre} = props;
+    const {author} = props;
     return (
         <>
-            <h3>Dune</h3>
-            <p className="book-meta">Frank Herbert · sci-fi</p>
+            <h3 className="book-title">{title}</h3>
+            <p className="book-meta">{author+' · '+genre}</p>
         </>
     )
 }
