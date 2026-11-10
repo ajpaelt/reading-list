@@ -1,6 +1,13 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
+import App from './App.tsx'
 
-createRoot(document.getElementById('root')!).render(
-  <h1> </h1>)
+
+const roots = document.getElementById('root')
+if (!roots) {
+  throw new Error("root not found")
+}
+createRoot(roots).render(
+  <App/>
+)
