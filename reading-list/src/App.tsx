@@ -1,18 +1,18 @@
+import Header from "./components/Header"
+import Footer from "./components/Footer"
+import BookText from "./components/BookText"
 
 function App() {
 
     return (
         <body className = "page">
-            <header>
-                <h1>My Reading List</h1>
-                <p> Books I have read</p>
-            </header>
+            <Header />
             <main>
-                
+                <div className="bookInfo">
+                    <BookText />
+                </div>  
             </main>
-            <footer>
-                That's all the books I have read!
-            </footer>
+            <Footer />
         </body>
     )
 }
