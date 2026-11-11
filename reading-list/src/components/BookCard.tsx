@@ -19,6 +19,7 @@ function BookCard (props:BookCardProps) {
 
     return (
         <li className={isRead ? 'book-card is-read':'book-card'} >
+            {isRead && <p className="badge">Read!</p>}
             <BookText title={title} genre={genre} author={author}/>
             <div className='book-actions'>
                 <button onClick = {() => onToggleRead(id)} className='book-actions' type = 'button' id='mark-read' aria-label={isRead ? 'mark-unread-'+title:'mark-read-'+title}>
@@ -28,7 +29,7 @@ function BookCard (props:BookCardProps) {
                     Delete
                 </button>
             </div>
-            {isRead && <p className="badge">Read!</p>}
+            
         </li>
     );
 }
