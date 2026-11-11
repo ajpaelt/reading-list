@@ -1,9 +1,7 @@
 import type {BookCardProps} from './BookCard'
 
-function BookText (props:BookCardProps) {
-    const {title} = props;
-    const {genre} = props;
-    const {author} = props;
+function BookText (props: {title:string; genre:string; author:string}) {
+    const { title, genre, author } = props
     return (
         <>
             <h3 className="book-title">{title}</h3>

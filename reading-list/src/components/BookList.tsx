@@ -1,9 +1,9 @@
-import { BOOKS } from "../data/books"
+import type { Book } from "../types"
 import BookCard from "./BookCard"
 
 
-function BookList() {
-    if (BOOKS.length === 0) {
+function BookList(props: {books: Book[], onToggleRead(id:number): void, onDelete(id:number): void }) {
+    if (props.books.length === 0) {
         return (
             <ul className="book-list">
                 <li className="empty-state">
@@ -16,8 +16,8 @@ function BookList() {
     }
     return (
         <ul className="book-list">
-            {BOOKS.map((book) => 
-                <BookCard key = {book.id} title = {book.title} isRead= {book.is_read} author = {book.author} genre = {book.genre}/>
+            {props.books.map((book) => 
+                <BookCard key = {book.id} id = {book.id} title = {book.title} isRead= {book.is_read} author = {book.author} genre = {book.genre} onToggleRead={props.onToggleRead} onDelete={props.onDelete}/>
             )}
         </ul>
     )
