@@ -1,8 +1,9 @@
+import { BOOKS } from "../data/books";
 import type { Book } from "../types"
 import BookCard from "./BookCard"
 
 
-function BookList(props: {books: Book[], onToggleRead(id:number): void, onDelete(id:number): void }) {
+function BookList(props: {heading: string, books: Book[], onToggleRead(id:number): void, onDelete(id:number): void }) {
     if (props.books.length === 0) {
         return (
             <ul className="book-list">
@@ -16,6 +17,7 @@ function BookList(props: {books: Book[], onToggleRead(id:number): void, onDelete
     }
     return (
         <ul className="book-list">
+            <h2>{props.heading} {props.books.length}</h2>
             {props.books.map((book) => 
                 <BookCard key = {book.id} id = {book.id} title = {book.title} isRead= {book.is_read} author = {book.author} genre = {book.genre} onToggleRead={props.onToggleRead} onDelete={props.onDelete}/>
             )}

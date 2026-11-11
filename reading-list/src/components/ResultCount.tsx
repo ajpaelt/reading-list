@@ -1,9 +1,10 @@
-import { BOOKS } from "../data/books"
+import type {Book} from '../types'
 
-function ResultCount() {
+
+function ResultCount(props:{books:Book[]}) {
     return (
         <h3 className ="result-count">
-            {"Showing " + BOOKS.length +" books"}
+            {"Showing " + props.books.length +" books"}
         </h3>
     )
 }

@@ -6,9 +6,14 @@ import { useState } from "react";
 import { BOOKS } from "./data/books";
 import type { Book } from "./types";
 import ResetShelf from "./components/ResetShelf";
+import { ReadCounter } from "./components/ReadCounter"
+
 
 function App() {
+    
     const [books, setBooks] = useState<Book[]>(BOOKS);
+    const unreadBooks = books.filter((book) => !book.is_read);
+    const readBooks = books.filter((book) => book.is_read);
     function toggleRead(id: number) {
         setBooks((currBooks) => 
             currBooks.map((book) => 
@@ -28,9 +33,12 @@ function App() {
         <body className = "page">
             <Header />
             <main>
-                <ResultCount/>
+                <ResultCount books={books}/>
+                {/* <ReadCounter books={books}/> */}
                 <ResetShelf onResetBooks = {() => setBooks(BOOKS)} />
-                <BookList books = {books} onToggleRead = {toggleRead} onDelete = {deleteBook}/>
+                <BookList heading='Read:' books = {readBooks} onToggleRead = {toggleRead} onDelete = {deleteBook}/>
+                <BookList heading='Unread:' books = {unreadBooks} onToggleRead = {toggleRead} onDelete = {deleteBook}/>
+
             </main>
             <Footer />
         </body>
