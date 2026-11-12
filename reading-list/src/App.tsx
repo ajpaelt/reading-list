@@ -48,7 +48,7 @@ function App() {
                 <p></p>
                 <ResetShelf onResetBooks = {() => setBooks(BOOKS)} />
                 <p></p>
-                <FilterBar filter={filter} onSetFilter={setFilter}/>
+                <FilterBar current={filter} onChange={setFilter}/>
                 <BookList heading={filter} books = {visibleBooks} onToggleRead = {toggleRead} onDelete = {deleteBook}/>
                 {/* <BookList heading='Unread:' books = {unreadBooks} onToggleRead = {toggleRead} onDelete = {deleteBook}/> */}
 

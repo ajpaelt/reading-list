@@ -1,13 +1,13 @@
 import type {StatusFilter} from '../types'
 
 
-export function FilterBar(props:{filter:StatusFilter, onSetFilter(filter:StatusFilter):void }) {
-    const {filter, onSetFilter} = props
+export function FilterBar(props:FilterBarProps) {
+    const {onChange} = props
     return (
         <>
-            <button className='btn' type='button' onClick={()=>onSetFilter('all')}>All</button>
-            <button className='btn' type='button' onClick={()=>onSetFilter('read')}>Read</button>
-            <button className='btn' type='button' onClick={()=>onSetFilter('unread')}>Unread</button>
+            <button className='btn' type='button' onClick={()=>onChange('all')}>All</button>
+            <button className='btn' type='button' onClick={()=>onChange('read')}>Read</button>
+            <button className='btn' type='button' onClick={()=>onChange('unread')}>Unread</button>
         </>
     )
 }
