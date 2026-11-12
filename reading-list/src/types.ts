@@ -9,3 +9,8 @@ export interface Book {
 
 export type StatusFilter = "all" | "read" | "unread";
 
+export interface FormValues {
+  title: string;
+  author: string;
+  genre: string;
+}
