@@ -2,15 +2,18 @@ import Header from "./components/Header"
 import Footer from "./components/Footer"
 import BookList from "./components/BookList";
 import ResultCount from "./components/ResultCount";
-import { useState } from "react";
+import React, { useState } from "react";
 import { BOOKS } from "./data/books";
-import type { Book, StatusFilter } from "./types";
+import type { Book, FormValues, StatusFilter } from "./types";
 import ResetShelf from "./components/ResetShelf";
 import {FilterBar} from './components/FilterBar'
 import SearchBox from "./components/SearchBox";
 import GenreSelect from "./components/GenreSelect";
 import PagesOnlyToggle from "./components/CheckBox";
 import { StatusRadio } from "./components/StatusRadio";
+import type { FormField } from "./components/BookForm";
+import type { ChangeEvent, FormEvent } from "react"
+import BookForm from "./components/BookForm";
 
 function App() {
     
@@ -22,7 +25,9 @@ function App() {
 
     const [search, setSearch] = useState<string>("");
 
-    const[hasPages, setHasPages] = useState<boolean>(false);
+    const [hasPages, setHasPages] = useState<boolean>(false);
+
+    const [formValues, setFormValues] = useState<FormValues>({title:"",author:"",genre:""})
 
     const genreList = ["",...Array.from(new Set(books.map((book) => {
         return book.genre
@@ -63,9 +68,17 @@ function App() {
         ))
     };
 
+    function formChangeHandler(field: FormField) {
+        return (event:ChangeEvent<HTMLInputElement>) =>
+            setFormValues({...formValues,[field]:event.target.value})
+    }
 
-
-
+    function formSubmissionHandler(event:FormEvent<HTMLFormElement>) {
+        event.preventDefault()
+        let newBook:Book = {...formValues, is_read:false, id:0} 
+        setBooks([...books, newBook])
+        setFormValues({title:"",author:"",genre:""})
+    }
 
     return (
         <div className="page">
@@ -79,7 +92,8 @@ function App() {
                 <ResetShelf onResetBooks = {() => setBooks(BOOKS)} />
                 <p></p>
                 <StatusRadio current={filter} onChange={setFilter}/>
-
+                <p></p>
+                <BookForm onChange={formChangeHandler} onAddBook={formSubmissionHandler}/>
                 <BookList heading={filter} books = {visibleBooks} onToggleRead = {toggleRead} onDelete = {deleteBook}/>
             </main>
             <Footer />

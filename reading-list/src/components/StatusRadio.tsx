@@ -16,10 +16,10 @@ export function StatusRadio(props:StatusRadioProps) {
                         {option}
                         <input
                             className="btn"
-                            id={option}
+                            key={option}
                             type="radio"
                             checked={current == option}
-                            onClick={()=>onChange(option)}
+                            onChange={()=>onChange(option)}
                         />
                     </>
                 )}
