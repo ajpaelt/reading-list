@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function Echo() {
-  const [text, setText] = useState("");
+    const [text, setText] = useState("");
   return (
     <div>
       <label htmlFor="echo">Say something</label>
@@ -9,4 +9,4 @@ export default function Echo() {
       <p>You typed {text.length} characters.</p>
     </div>
   );
-}   
+}
