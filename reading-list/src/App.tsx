@@ -8,6 +8,7 @@ import type { Book, StatusFilter } from "./types";
 import ResetShelf from "./components/ResetShelf";
 import {FilterBar} from './components/FilterBar'
 import SearchBox from "./components/SearchBox";
+import GenreSelect from "./components/GenreSelect";
 
 function App() {
     
@@ -15,7 +16,13 @@ function App() {
 
     const [filter, setFilter] = useState<StatusFilter>("all");
 
+    const [genre, setGenre] = useState<string>("")
+
     const [search, setSearch] = useState<string>("")
+
+    const genreList = ["",...Array.from(new Set(books.map((book) => {
+        return book.genre
+    })))];
 
     function filterBooks(search:string,books:Book[]) {
         let arrOut = books.filter((book) => {
@@ -23,9 +30,12 @@ function App() {
             else {return filter === 'read'?book.is_read:!book.is_read}
         });
         arrOut = arrOut.filter((book) => {
-            return book.title.trim().toLowerCase().search(search.trim().toLowerCase()) !== -1
-            || book.author.trim().toLowerCase().search(search.trim().toLowerCase()) !== -1
+            return book.title.trim().toLowerCase().includes(search.trim().toLowerCase())
+            || book.author.trim().toLowerCase().includes(search.trim().toLowerCase())
         });
+        arrOut = arrOut.filter((book) => {
+            return book.genre.includes(genre)
+        })
         return arrOut
 
     }
@@ -55,6 +65,7 @@ function App() {
             <Header />
             <main>
                 <SearchBox value={search} onChange={setSearch}/>
+                <GenreSelect genreList={genreList} genre={genre} onChange={setGenre}/>
                 <ResultCount books={books}/>
                 <p></p>
                 <ResetShelf onResetBooks = {() => setBooks(BOOKS)} />
