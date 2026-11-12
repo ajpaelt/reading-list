@@ -10,6 +10,7 @@ import {FilterBar} from './components/FilterBar'
 import SearchBox from "./components/SearchBox";
 import GenreSelect from "./components/GenreSelect";
 import PagesOnlyToggle from "./components/CheckBox";
+import { StatusRadio } from "./components/StatusRadio";
 
 function App() {
     
@@ -77,7 +78,7 @@ function App() {
                 <p></p>
                 <ResetShelf onResetBooks = {() => setBooks(BOOKS)} />
                 <p></p>
-                <FilterBar current={filter} onChange={setFilter}/>
+                <StatusRadio current={filter} onChange={setFilter}/>
 
                 <BookList heading={filter} books = {visibleBooks} onToggleRead = {toggleRead} onDelete = {deleteBook}/>
             </main>

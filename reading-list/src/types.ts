@@ -8,3 +8,4 @@ export interface Book {
 }
 
 export type StatusFilter = "all" | "read" | "unread";
+
