@@ -69,8 +69,13 @@ function App() {
     };
 
     function formChangeHandler(field: FormField) {
-        return (event:ChangeEvent<HTMLInputElement>) =>
+        return (event:ChangeEvent<HTMLInputElement>) => {
             setFormValues({...formValues,[field]:event.target.value})
+        }
+    }
+
+    function clearForm() {
+        setFormValues({title:"",author:"",genre:""})
     }
 
     function formSubmissionHandler(event:FormEvent<HTMLFormElement>) {
@@ -80,7 +85,7 @@ function App() {
             id:books.reduce((prev,next)=>next.id>prev.id?next:prev).id+1
         } 
         setBooks([...books, newBook])
-        setFormValues({title:"",author:"",genre:""})
+        clearForm()
     }
 
     return (
@@ -96,7 +101,7 @@ function App() {
                 <p></p>
                 <StatusRadio current={filter} onChange={setFilter}/>
                 <p></p>
-                <BookForm onChange={formChangeHandler} onAddBook={formSubmissionHandler}/>
+                <BookForm values={formValues} onChange={formChangeHandler} onAddBook={formSubmissionHandler} onClear={clearForm}/>
                 <BookList heading={filter} books = {visibleBooks} onToggleRead = {toggleRead} onDelete = {deleteBook}/>
             </main>
             <Footer />
