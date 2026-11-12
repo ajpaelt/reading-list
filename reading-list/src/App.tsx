@@ -7,7 +7,7 @@ import { BOOKS } from "./data/books";
 import type { Book, StatusFilter } from "./types";
 import ResetShelf from "./components/ResetShelf";
 import {FilterBar} from './components/FilterBar'
-import Echo from "./scratch/Echo";
+import SearchBox from "./components/SearchBox";
 
 function App() {
     
@@ -15,11 +15,22 @@ function App() {
 
     const [filter, setFilter] = useState<StatusFilter>("all");
 
+    const [search, setSearch] = useState<string>("")
 
-    const visibleBooks = books.filter((book) => {
-        if (filter === 'all') {return true}
-        else {return filter === 'read'?book.is_read:!book.is_read}
-    });
+    function filterBooks(search:string,books:Book[]) {
+        let arrOut = books.filter((book) => {
+            if (filter === 'all') {return true}
+            else {return filter === 'read'?book.is_read:!book.is_read}
+        });
+        arrOut = arrOut.filter((book) => {
+            return book.title.trim().toLowerCase().search(search.trim().toLowerCase()) !== -1
+            || book.author.trim().toLowerCase().search(search.trim().toLowerCase()) !== -1
+        });
+        return arrOut
+
+    }
+
+    const visibleBooks = filterBooks(search,books)
 
     function toggleRead(id: number) {
         setBooks((currBooks) => 
@@ -27,6 +38,7 @@ function App() {
                 (book.id === id ? {...book, is_read: !book.is_read} : book)
             ))
     };
+
     function deleteBook(id: number) {
         setBooks((currBooks) =>
         currBooks.filter((book) =>
@@ -36,10 +48,13 @@ function App() {
 
 
 
+
+
     return (
         <div className="page">
             <Header />
             <main>
+                <SearchBox value={search} onChange={setSearch}/>
                 <ResultCount books={books}/>
                 <p></p>
                 <ResetShelf onResetBooks = {() => setBooks(BOOKS)} />
@@ -47,8 +62,6 @@ function App() {
                 <FilterBar current={filter} onChange={setFilter}/>
 
                 <BookList heading={filter} books = {visibleBooks} onToggleRead = {toggleRead} onDelete = {deleteBook}/>
-                {/* <BookList heading='Unread:' books = {unreadBooks} onToggleRead = {toggleRead} onDelete = {deleteBook}/> */}
-                <Echo/>
             </main>
             <Footer />
         </div>
