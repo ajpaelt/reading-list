@@ -18,7 +18,7 @@ function BookList(props: {heading: string, books: Book[], onToggleRead(id:number
         <ul className="book-list">
             <h2>{props.heading} {props.books.length}</h2>
             {props.books.map((book) => 
-                <BookCard key = {book.id} id = {book.id} title = {book.title} isRead= {book.is_read} author = {book.author} genre = {book.genre} onToggleRead={props.onToggleRead} onDelete={props.onDelete}/>
+                <BookCard key = {book.id} id = {book.id} title = {book.title} isRead= {book.is_read} author = {book.author} genre = {book.genre} pages = {book.pages} onToggleRead={props.onToggleRead} onDelete={props.onDelete}/>
             )}
         </ul>
     )

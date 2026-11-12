@@ -9,6 +9,7 @@ import ResetShelf from "./components/ResetShelf";
 import {FilterBar} from './components/FilterBar'
 import SearchBox from "./components/SearchBox";
 import GenreSelect from "./components/GenreSelect";
+import PagesOnlyToggle from "./components/CheckBox";
 
 function App() {
     
@@ -16,9 +17,11 @@ function App() {
 
     const [filter, setFilter] = useState<StatusFilter>("all");
 
-    const [genre, setGenre] = useState<string>("")
+    const [genre, setGenre] = useState<string>("");
 
-    const [search, setSearch] = useState<string>("")
+    const [search, setSearch] = useState<string>("");
+
+    const[hasPages, setHasPages] = useState<boolean>(false);
 
     const genreList = ["",...Array.from(new Set(books.map((book) => {
         return book.genre
@@ -35,6 +38,9 @@ function App() {
         });
         arrOut = arrOut.filter((book) => {
             return book.genre.includes(genre)
+        })
+        arrOut = arrOut.filter((book) => {
+            return hasPages ? book.pages !== undefined : true
         })
         return arrOut
 
@@ -66,6 +72,7 @@ function App() {
             <main>
                 <SearchBox value={search} onChange={setSearch}/>
                 <GenreSelect genreList={genreList} genre={genre} onChange={setGenre}/>
+                <PagesOnlyToggle isChecked={hasPages} onChange={setHasPages}/>
                 <ResultCount books={books}/>
                 <p></p>
                 <ResetShelf onResetBooks = {() => setBooks(BOOKS)} />

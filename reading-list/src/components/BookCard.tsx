@@ -8,17 +8,18 @@ export interface BookCardProps {
   author: string;
   genre: string;
   isRead: boolean;
+  pages?: number;
   onToggleRead: (id:number) => void;
   onDelete: (id:number) => void;
 }
 
 function BookCard (props:BookCardProps) {
-    const {id, title, genre, author, isRead, onToggleRead, onDelete} = props;
+    const {id, title, genre, author, isRead, pages, onToggleRead, onDelete} = props;
 
     return (
         <li className={isRead ? 'book-card is-read':'book-card'} >
             {isRead && <p className="badge">Read!</p>}
-            <BookText title={title} genre={genre} author={author}/>
+            <BookText title={title} genre={genre} author={author} pages={pages}/>
             <div className='book-actions'>
                 <button onClick = {() => onToggleRead(id)} className='book-actions' type = 'button' id='mark-read' aria-label={isRead ? 'mark-unread-'+title:'mark-read-'+title}>
                     {isRead ? 'Mark unread':'Mark read'}
