@@ -37,7 +37,7 @@ function App() {
 
 
     return (
-        <body className = "page">
+        <div className="page">
             <Header />
             <main>
                 <ResultCount books={books}/>
@@ -45,12 +45,13 @@ function App() {
                 <ResetShelf onResetBooks = {() => setBooks(BOOKS)} />
                 <p></p>
                 <FilterBar current={filter} onChange={setFilter}/>
+
                 <BookList heading={filter} books = {visibleBooks} onToggleRead = {toggleRead} onDelete = {deleteBook}/>
                 {/* <BookList heading='Unread:' books = {unreadBooks} onToggleRead = {toggleRead} onDelete = {deleteBook}/> */}
                 <Echo/>
             </main>
             <Footer />
-        </body>
+        </div>
     )
 }
 

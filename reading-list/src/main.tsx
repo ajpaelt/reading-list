@@ -2,6 +2,7 @@
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
+import { StrictMode } from 'react'
 
 
 const roots = document.getElementById('root')
@@ -9,5 +10,7 @@ if (!roots) {
   throw new Error("root not found")
 }
 createRoot(roots).render(
-  <App/>
+  <StrictMode>
+    <App/>
+  </StrictMode>
 )
