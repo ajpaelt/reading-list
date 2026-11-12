@@ -75,7 +75,10 @@ function App() {
 
     function formSubmissionHandler(event:FormEvent<HTMLFormElement>) {
         event.preventDefault()
-        let newBook:Book = {...formValues, is_read:false, id:0} 
+        let newBook:Book = {
+            ...formValues, is_read:false,
+            id:books.reduce((prev,next)=>next.id>prev.id?next:prev).id+1
+        } 
         setBooks([...books, newBook])
         setFormValues({title:"",author:"",genre:""})
     }
