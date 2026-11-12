@@ -7,7 +7,7 @@ import { BOOKS } from "./data/books";
 import type { Book, StatusFilter } from "./types";
 import ResetShelf from "./components/ResetShelf";
 import {FilterBar} from './components/FilterBar'
-
+import Echo from "./scratch/Echo";
 
 function App() {
     
@@ -47,7 +47,7 @@ function App() {
                 <FilterBar current={filter} onChange={setFilter}/>
                 <BookList heading={filter} books = {visibleBooks} onToggleRead = {toggleRead} onDelete = {deleteBook}/>
                 {/* <BookList heading='Unread:' books = {unreadBooks} onToggleRead = {toggleRead} onDelete = {deleteBook}/> */}
-
+                <Echo/>
             </main>
             <Footer />
         </body>
