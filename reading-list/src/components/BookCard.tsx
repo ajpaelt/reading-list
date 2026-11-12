@@ -1,5 +1,3 @@
-import { BOOKS } from "../data/books";
-import type { Book } from "../types";
 import BookText from "./BookText";
 
 

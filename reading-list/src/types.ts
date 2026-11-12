@@ -6,3 +6,5 @@ export interface Book {
   is_read: boolean;
   pages?: number;
 }
+
+export type StatusFilter = "all" | "read" | "unread";

@@ -6,7 +6,6 @@ import { useState } from "react";
 import { BOOKS } from "./data/books";
 import type { Book, StatusFilter } from "./types";
 import ResetShelf from "./components/ResetShelf";
-import { ReadCounter } from "./components/ReadCounter"
 import {FilterBar} from './components/FilterBar'
 
 
@@ -21,9 +20,6 @@ function App() {
         if (filter === 'all') {return true}
         else {return filter === 'read'?book.is_read:!book.is_read}
     });
-
-    const unreadBooks = books.filter((book) => !book.is_read);
-    const readBooks = books.filter((book) => book.is_read);
 
     function toggleRead(id: number) {
         setBooks((currBooks) => 

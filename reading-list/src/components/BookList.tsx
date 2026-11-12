@@ -1,4 +1,3 @@
-import { BOOKS } from "../data/books";
 import type { Book } from "../types"
 import BookCard from "./BookCard"
 
