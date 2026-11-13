@@ -42,6 +42,18 @@ describe("progress bar", () => {
 
     });
 
+    test("clicking rating 3 when already picked doesn't call onChange", async() => {
+        const user = userEvent.setup();
+        const onChange = vi.fn();
+        render(<RatingPicker value = {3} onChange = {onChange}/>);
+
+        await user.click(screen.getByRole("radio", {name: "3"}))
+
+        expect(onChange).not.toHaveBeenCalled()
+
+    });
+
+
 });
 
 
