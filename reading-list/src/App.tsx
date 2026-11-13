@@ -2,11 +2,10 @@ import Header from "./components/Header"
 import Footer from "./components/Footer"
 import BookList from "./components/BookList";
 import ResultCount from "./components/ResultCount";
-import React, { useState } from "react";
+import { useState } from "react";
 import { BOOKS } from "./data/books";
 import type { Book, FormValues, StatusFilter } from "./types";
 import ResetShelf from "./components/ResetShelf";
-import {FilterBar} from './components/FilterBar'
 import SearchBox from "./components/SearchBox";
 import GenreSelect from "./components/GenreSelect";
 import PagesOnlyToggle from "./components/CheckBox";
